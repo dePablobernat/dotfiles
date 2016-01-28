@@ -17,8 +17,14 @@ else # OS X `ls`
 fi
 
 alias ls='ls ${colorflag}'
-alias git=hub
-alias unity='start Unity.exe -projectPath $(pwd)/$*'
+
+if [ $(which hub) ]; then
+	alias git=hub
+fi
+
+if	[ -f Unity.exe ]; then
+	alias unity='start Unity.exe -projectPath $(pwd)/$*'
+fi
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
