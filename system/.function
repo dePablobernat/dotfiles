@@ -1,0 +1,19 @@
+# open Atom!
+function atom() {
+	if [ $# -eq 0 ]; then
+		atom .;
+	else
+		atom "$@";
+	fi;
+}
+
+# Set the open command on windows
+if [ "$OS" = "MINGW64_NT-10.0" ]; then
+  function open() {
+    if [ $# -eq 0 ]; then
+  		explorer .;
+  	else
+  		explorer "$@";
+  	fi;
+  }
+fi

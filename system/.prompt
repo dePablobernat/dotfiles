@@ -1,0 +1,17 @@
+function cool_dir_prompt () {
+  p=${PWD/$HOME/\~}
+  p=${p/*develop/+}
+
+  if ((${#p} > 40)); then
+    echo "${p::10}...${p:(-20)}"
+  else
+    echo ${p}
+  fi
+
+  unset p
+}
+
+## Tab title
+PS1="\e]1;\W\a"
+## Prompt
+PS1="$PS1\[\033[36m\]\u \[\033[33;1m\]\$(cool_dir_prompt)\[\033[1;35m\]\$(__git_ps1)\[\033[m\]>  "
