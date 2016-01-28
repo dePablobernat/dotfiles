@@ -1,3 +1,8 @@
+# Load in the git branch prompt script.
+if [ -f ~/.git-prompt.sh ]; then
+  source ~/.git-prompt.sh
+fi
+
 function cool_dir_prompt () {
   p=${PWD/$HOME/\~}
   p=${p/*develop/+}

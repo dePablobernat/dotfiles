@@ -3,18 +3,17 @@
 
 # OS
 if [ "$(uname -s)" = "Darwin" ]; then
-    OS="OSX"
+  OS="OSX"
 else
-    OS=$(uname -s)
+  OS=$(uname -s)
 fi
-
 
 # Resolve DOTFILES_DIR (assuming ~/.dotfiles on distros without readlink and/or $BASH_SOURCE/$0)
 READLINK=$(which readlink || which greadlink)
 CURRENT_SCRIPT=$BASH_SOURCE
 
 if [[ -n $CURRENT_SCRIPT && -x "$READLINK" ]]; then
-  SCRIPT_PATH=$($READLINK -f "$CURRENT_SCRIPT")
+  SCRIPT_PATH=$($READLINK "$CURRENT_SCRIPT")
   DOTFILES_DIR=$(dirname "$(dirname "$SCRIPT_PATH")")
 elif [ -d "$HOME/.dotfiles" ]; then
   DOTFILES_DIR="$HOME/.dotfiles"
@@ -29,7 +28,7 @@ for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,path,env,alias,compl
 done
 
 if [ "$OS" = "OSX" ]; then
-    for DOTFILE in "$DOTFILES_DIR"/system/.{env,alias,function}.osx; do
+    for DOTFILE in "$DOTFILES_DIR"/system/.{env,alias,function,git}.osx; do
         [ -f "$DOTFILE" ] && . "$DOTFILE"
     done
 fi
