@@ -14,4 +14,4 @@ function cool_dir_prompt () {
 ## Tab title
 PS1="\e]1;\W\a"
 ## Prompt
-PS1="$PS1\[\033[36m\]\u \[\033[33;1m\]\$(cool_dir_prompt)\[\033[1;35m\]\$(__git_ps1)\[\033[m\]>  "
+PS1="$PS1\[\033[36m\]\u \[\033[33;1m\]\$(cool_dir_prompt)\[\033[1;35m\]\$(__git_ps1)\[\033[m\] $  "
