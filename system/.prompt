@@ -276,7 +276,7 @@ function cool_dir_prompt () {
 ## Tab title
 sexy_bash_prompt_tab="\e]1;\W\a"
 ## Prompt
-PS1="$sexy_bash_prompt_tab \
+PS1="$sexy_bash_prompt_tab\
 \[$sexy_bash_prompt_user_color\]\u\[$sexy_bash_prompt_reset\] \
 \[$sexy_bash_prompt_preposition_color\]at\[$sexy_bash_prompt_reset\] \
 \[$sexy_bash_prompt_device_color\]\h\[$sexy_bash_prompt_reset\] \
