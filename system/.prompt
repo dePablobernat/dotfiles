@@ -260,28 +260,40 @@ sexy_bash_prompt_get_git_info () {
 #   source ~/.git-prompt.sh
 # fi
 
-function cool_dir_prompt () {
+function cool_bash_dir_prompt () {
   output=${PWD/$HOME/\~}
   output=${output/*develop/+}
 
   if ((${#output} > 40)); then
-    echo "${output::10}...${output:(-20)}"
-  else
-    echo ${output}
+    output="${output::10}...${output:(-20)}"
   fi
 
+  echo "$output"
+  unset output
+}
+
+function cool_bash_git_dir () {
+  output=$(git rev-parse --show-toplevel)
+
+  if [[ -n "$output" ]]; then
+    output=${output##*/}
+  else
+    output=${PWD##*/}
+  fi
+
+  echo "$output"
   unset output
 }
 
 ## Tab title
-sexy_bash_prompt_tab="\e]1;\W\a"
+sexy_bash_prompt_tab="\e]1;\$(cool_bash_git_dir)\a"
 ## Prompt
 PS1="$sexy_bash_prompt_tab\
 \[$sexy_bash_prompt_user_color\]\u\[$sexy_bash_prompt_reset\] \
 \[$sexy_bash_prompt_preposition_color\]at\[$sexy_bash_prompt_reset\] \
 \[$sexy_bash_prompt_device_color\]\h\[$sexy_bash_prompt_reset\] \
 \[$sexy_bash_prompt_preposition_color\]in\[$sexy_bash_prompt_reset\] \
-\[$sexy_bash_prompt_dir_color\]\$(cool_dir_prompt)\[$sexy_bash_prompt_reset\]\
+\[$sexy_bash_prompt_dir_color\]\$(cool_bash_dir_prompt)\[$sexy_bash_prompt_reset\]\
 \$( sexy_bash_prompt_is_on_git && \
   echo -n \" \[$sexy_bash_prompt_preposition_color\]on\[$sexy_bash_prompt_reset\] \" && \
   echo -n \"\[$sexy_bash_prompt_git_status_color\]\$(sexy_bash_prompt_get_git_info)\" && \
