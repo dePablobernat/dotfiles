@@ -10,6 +10,9 @@ if [ -d "$DOTFILES_DIR/.git" ]; then
   git --work-tree="$DOTFILES_DIR" --git-dir="$DOTFILES_DIR/.git" pull origin master
 fi
 
+# Personalize config files
+config.sh
+
 # Bunch of symlinks
 for DOTFILE in "$DOTFILES_DIR"/{runcom,git}/.*; do
   if [ -f ~/${DOTFILE##*/} ]; then
