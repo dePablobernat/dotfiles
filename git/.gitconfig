@@ -1,38 +1,48 @@
 [user]
 	name = Alberto Fernandez
-	email = (null)
+	email = albertofdzm@gmail.com
 [push]
 	default = simple
 [core]
-	autocrlf = true
+	autocrlf = input
 	trustctime = false
 	editor = vim
 	filemode = false
+  excludesfile = ~/.gitignore_global
+[help]
+  autocorrect = 30
 [credential]
 	helper = wincred
 [alias]
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
   ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  fl = log -u
   st = status -s
   ci = commit
   co = checkout
   br = branch
   diff = diff --word-diff
-	tree = log --graph --oneline --decorate
-	last = log -1 --stat
-	cp = cherry-pick
-	cl = clone
-	unstage = reset HEAD --
-	dc = diff --cached
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+  tree = log --graph --oneline --decorate
+  last = log -1 --stat
+  cp = cherry-pick
+  cl = clone
+  unstage = reset HEAD --
+  dc = diff --cached
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 [color]
-	ui = true
+  ui = true
 [merge]
-	tool = vimdiff
+  tool = vimdiff
 [mergetool]
-	keeptemporaries = false
-	keepbackups = false
-	prompt = false
-	trustexitcode = false
+  keeptemporaries = false
+  keepbackups = false
+  prompt = false
+  trustexitcode = false
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
+[github]
+  user = albertofdzm
