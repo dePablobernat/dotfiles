@@ -267,11 +267,10 @@ sexy_bash_prompt_get_git_info () {
 # fi
 
 function cool_dir_prompt () {
-  output=$(pwd)
-  output=${output/$HOME/\~}
+  output=${PWD/$HOME/\~}
   output=${output/*develop/+}
 
-  if ((${#output} > 40)); then
+  if [ ${#output} -gt 40 ]; then
     echo "${output::10}...${output:(-20)}"
   else
     echo ${output}
