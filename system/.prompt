@@ -279,12 +279,12 @@ function cool_bash_dir_prompt () {
 }
 
 function cool_bash_git_dir () {
-  output=$(git rev-parse --show-toplevel)
+  output="$(git rev-parse --show-toplevel)"
 
   if [[ -n "$output" ]]; then
-    output=${output##*/}
+    output="${output##*/}"
   else
-    output=${PWD##*/}
+    output="${PWD##*/}"
   fi
 
   echo "$output"
@@ -292,7 +292,7 @@ function cool_bash_git_dir () {
 }
 
 ## Tab title
-sexy_bash_prompt_tab="\e]1;\$(cool_bash_git_dir)\a"
+sexy_bash_prompt_tab="\e]1;\$(sexy_bash_prompt_is_on_git && cool_bash_git_dir)\a"
 ## Prompt
 PS1="\
 $sexy_bash_prompt_tab\

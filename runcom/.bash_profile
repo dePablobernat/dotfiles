@@ -29,7 +29,7 @@ else
 fi
 
 # Finally we can source the dotfiles (order matters)
-for DOTFILE in "$DOTFILES_DIR"/system/.{function,env,alias,completion,grep,prompt}; do
+for DOTFILE in "$DOTFILES_DIR"/system/.{function,env,alias,completion,prompt}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
@@ -38,21 +38,6 @@ if [ "$OS" = "OSX" ]; then
     [ -f "$DOTFILE" ] && . "$DOTFILE"
   done
 fi
-
-# Set LSCOLORS
-if [ -f "$DOTFILES_DIR"/system/.dir_colors ]; then
-  eval "$(dircolors "$DOTFILES_DIR"/system/.dir_colors)"
-fi
-
-# Hook for extra/custom stuff
-EXTRA_DIR="$HOME/.extra"
-
-if [ -d "$EXTRA_DIR" ]; then
-  for EXTRAFILE in "$EXTRA_DIR"/runcom/*.sh; do
-    [ -f "$EXTRAFILE" ] && . "$EXTRAFILE"
-  done
-fi
-
 
 # Clean up
 unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE
