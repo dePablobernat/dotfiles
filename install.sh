@@ -26,7 +26,7 @@ for DOTFILE in "$DOTFILES_DIR"/{runcom,git}/.*; do
   fi
 
   if [ -f "$DOTFILE" ]; then
-    if [ "$OS" = "MINGW64_NT-10.0" ]; then
+    if [ "$OS" = "WIN10" ] || [ "$OS" = "Windows_NT" ]; then
       PARSED_HOME=${HOME//\//\\}
       PARSED_HOME=${PARSED_HOME/\\/}
       PARSED_HOME=${PARSED_HOME/\\/:\\}

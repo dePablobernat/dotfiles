@@ -63,8 +63,14 @@ fi
 ###-end-npm-completion-###
 
 # Grunt completion
-eval "$(grunt --completion=bash)"
+if [ $(type -P grunt) ]; then
+  eval "$(grunt --completion=bash)"
+fi
 # Gulp completion
-eval "$(gulp --completion=bash)"
+if [ $(type -P gulp) ]; then
+  eval "$(gulp --completion=bash)"
+fi
 
-source $( echo $(which vv)-completions)
+if [ $(type -P vv) ]; then
+  source $( echo $(which vv)-completions)
+fi

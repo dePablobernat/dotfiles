@@ -11,19 +11,19 @@ alias develop="cd /e/develop/"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
+  colorflag="--color"
 else # OS X `ls`
-	colorflag="-G"
+  colorflag="-G"
 fi
 
 alias ls='ls ${colorflag}'
 
-if [ $(which hub) ]; then
-	alias git=hub
+if [ $(type -P hub) ]; then
+  alias git=hub
 fi
 
-if	[ -f Unity.exe ]; then
-	alias unity='start Unity.exe -projectPath $(pwd)/$*'
+if [ $(type -P Unity) ]; then
+  alias unity='start Unity -projectPath $(pwd)/$1'
 fi
 
 # Always enable colored `grep` output

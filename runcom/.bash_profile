@@ -4,16 +4,22 @@
 # OS
 if [ "$(uname -s)" = "Darwin" ]; then
   OS="OSX"
+elif [ "$(uname -s)" = "MINGW64_NT-10.0" ]; then
+  OS="WIN10"
 else
   OS=$(uname -s)
 fi
 
 # Resolve DOTFILES_DIR (assuming ~/.dotfiles on distros without readlink and/or $BASH_SOURCE/$0)
-READLINK=$(which readlink || which greadlink)
+READLINK=$(type -P readlink || type -P greadlink)
 CURRENT_SCRIPT=$BASH_SOURCE
 
 if [[ -n $CURRENT_SCRIPT && -x "$READLINK" ]]; then
-  SCRIPT_PATH=$($READLINK "$CURRENT_SCRIPT")
+  if [ "$OS" = "WIN10" ]; then
+    SCRIPT_PATH=$($READLINK -f "$CURRENT_SCRIPT")
+  else
+    SCRIPT_PATH=$($READLINK "$CURRENT_SCRIPT")
+  fi
   DOTFILES_DIR=$(dirname "$(dirname "$SCRIPT_PATH")")
 elif [ -d "$HOME/.dotfiles" ]; then
   DOTFILES_DIR="$HOME/.dotfiles"
@@ -23,12 +29,12 @@ else
 fi
 
 # Finally we can source the dotfiles (order matters)
-for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,path,env,alias,completion,grep,prompt,nvm,rvm,custom}; do
+for DOTFILE in "$DOTFILES_DIR"/system/.{function,env,alias,completion,grep,prompt}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
 if [ "$OS" = "OSX" ]; then
-  for DOTFILE in "$DOTFILES_DIR"/system/.{env,alias,function,git}.osx; do
+  for DOTFILE in "$DOTFILES_DIR"/system/.{git}.osx; do
     [ -f "$DOTFILE" ] && . "$DOTFILE"
   done
 fi
@@ -42,9 +48,9 @@ fi
 EXTRA_DIR="$HOME/.extra"
 
 if [ -d "$EXTRA_DIR" ]; then
-    for EXTRAFILE in "$EXTRA_DIR"/runcom/*.sh; do
-        [ -f "$EXTRAFILE" ] && . "$EXTRAFILE"
-    done
+  for EXTRAFILE in "$EXTRA_DIR"/runcom/*.sh; do
+    [ -f "$EXTRAFILE" ] && . "$EXTRAFILE"
+  done
 fi
 
 
