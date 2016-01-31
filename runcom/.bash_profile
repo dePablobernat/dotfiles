@@ -28,6 +28,10 @@ else
   return # `exit 1` would quit the shell itself
 fi
 
+for DOTFILE in "$DOTFILES_DIR"/custom/pre-dots/.{function,env,alias,completion,prompt}; do
+  [ -f "$DOTFILE" ] && . "$DOTFILE"
+done
+
 # Finally we can source the dotfiles (order matters)
 for DOTFILE in "$DOTFILES_DIR"/system/.{function,env,alias,completion,prompt}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
@@ -38,6 +42,10 @@ if [ "$OS" = "OSX" ]; then
     [ -f "$DOTFILE" ] && . "$DOTFILE"
   done
 fi
+
+for DOTFILE in "$DOTFILES_DIR"/custom/post-dots/.{function,env,alias,completion,prompt}; do
+  [ -f "$DOTFILE" ] && . "$DOTFILE"
+done
 
 # Clean up
 unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE
