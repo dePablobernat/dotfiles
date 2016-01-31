@@ -279,7 +279,7 @@ function cool_bash_dir_prompt () {
 }
 
 function cool_bash_git_dir () {
-  output="$(git rev-parse --show-toplevel)"
+  output="$(sexy_bash_prompt_is_on_git && git rev-parse --show-toplevel)"
 
   if [[ -n "$output" ]]; then
     output="${output##*/}"
@@ -292,7 +292,13 @@ function cool_bash_git_dir () {
 }
 
 ## Tab title
-sexy_bash_prompt_tab="\e]1;\$(sexy_bash_prompt_is_on_git && cool_bash_git_dir)\a"
+
+if [ "$OS" = "OSX" ]; then
+  sexy_bash_prompt_tab="\e]1;\$(cool_bash_git_dir)\a"
+else
+  sexy_bash_prompt_tab="\[\033]0;\$(cool_bash_git_dir)\007\]"
+fi
+
 ## Prompt
 PS1="\
 $sexy_bash_prompt_tab\
