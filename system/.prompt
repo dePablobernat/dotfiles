@@ -267,7 +267,8 @@ sexy_bash_prompt_get_git_info () {
 # fi
 
 function cool_bash_dir_prompt () {
-  output=${PWD/$HOME/\~}
+  output=$(pwd)
+  output=${output/$HOME/\~}
   output=${output/*develop/+}
 
   if ((${#output} > 40)); then
@@ -291,28 +292,28 @@ function cool_bash_git_dir () {
   unset output
 }
 
-## Tab title
-
 if [ "$OS" = "OSX" ]; then
-  sexy_bash_prompt_tab="\e]1;\$(cool_bash_git_dir)\a"
+  cool_bash_tabname='\e]1;$(cool_bash_git_dir)\a'
 else
-  sexy_bash_prompt_tab="\[\033]0;\$(cool_bash_git_dir)\007\]"
+  cool_bash_tabname='\[\033]0;$(cool_bash_git_dir)\007\]'
 fi
 
+new_line=$'\n'
 ## Prompt
 PS1="\
-$sexy_bash_prompt_tab\
+$cool_bash_tabname\
+$new_line\
 \[$sexy_bash_prompt_user_color\]\u\[$sexy_bash_prompt_reset\]\
- \[$sexy_bash_prompt_preposition_color\]at\[$sexy_bash_prompt_reset\] \
+\[$sexy_bash_prompt_preposition_color\] at \[$sexy_bash_prompt_reset\]\
 \[$sexy_bash_prompt_device_color\]\h\[$sexy_bash_prompt_reset\]\
- \[$sexy_bash_prompt_preposition_color\]in\[$sexy_bash_prompt_reset\] \
+\[$sexy_bash_prompt_preposition_color\] in \[$sexy_bash_prompt_reset\]\
 \[$sexy_bash_prompt_dir_color\]\$(cool_bash_dir_prompt)\[$sexy_bash_prompt_reset\]\
 \$( sexy_bash_prompt_is_on_git && \
-  echo -n \" \[$sexy_bash_prompt_preposition_color\]on\[$sexy_bash_prompt_reset\] \" && \
+  echo -n \"\[$sexy_bash_prompt_preposition_color\] on \[$sexy_bash_prompt_reset\]\" && \
   echo -n \"\[$sexy_bash_prompt_git_status_color\]\$(sexy_bash_prompt_get_git_info)\" && \
   echo -n \"\[$sexy_bash_prompt_git_progress_color\]\$(sexy_bash_prompt_get_git_progress)\" && \
   echo -n \"\[$sexy_bash_prompt_preposition_color\]\"\
 )\[$sexy_bash_prompt_reset\]\
-
+$new_line\
 \[$sexy_bash_prompt_symbol_color\]$sexy_bash_prompt_symbol \[$sexy_bash_prompt_reset\]\
 "
