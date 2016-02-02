@@ -1,5 +1,5 @@
 # Get completions form .bash folder
-for COMPLETION in "$DOTFILES_DIR"/.bash/.*-completion.bash; do
+for COMPLETION in "$DOTFILES_DIR"/.bash/*-completion.bash; do
   [ -f "$COMPLETION" ] && . "$COMPLETION"
 done
 

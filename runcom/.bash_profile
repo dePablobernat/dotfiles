@@ -38,7 +38,7 @@ for DOTFILE in "$DOTFILES_DIR"/system/.{function,env,alias,completion,prompt}; d
 done
 
 if [ "$OS" = "OSX" ]; then
-  for DOTFILE in "$DOTFILES_DIR"/system/.{git}.osx; do
+  for DOTFILE in "$DOTFILES_DIR"/system/.git.osx; do
     [ -f "$DOTFILE" ] && . "$DOTFILE"
   done
 fi
