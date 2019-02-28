@@ -52,3 +52,10 @@ unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE
 
 # Export
 export OS DOTFILES_DIR EXTRA_DIR
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"

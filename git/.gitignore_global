@@ -3,3 +3,13 @@
 
 # MAC
 .DS_Store
+
+# VSCODE
+.history/
+.vscode/
+
+
+node_modules
+.ruby-version
+
+schema.rb

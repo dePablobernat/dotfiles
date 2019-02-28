@@ -1,6 +1,6 @@
 [user]
-	name = Alberto Fernandez
-	email = albertofdzm@gmail.com
+	name = Bernat de Pablo
+	email = depablobernat@gmail.com
 [push]
 	default = simple
 [core]
@@ -8,9 +8,9 @@
 	trustctime = false
 	editor = vim
 	filemode = false
-  excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [help]
-  autocorrect = 30
+  autocorrect = 300
 [credential]
 	helper = osxkeychain
 [alias]
@@ -21,20 +21,30 @@
   ci = commit
   co = checkout
   br = branch
-  diff = diff --word-diff
+  diff = diff --word-diff --color-words
   tree = log --graph --oneline --decorate
   last = log -1 --stat
   cp = cherry-pick
   cl = clone
-  unstage = reset HEAD --
   dc = diff --cached
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+  stashall = "!git add . && git stash"
+  serve = "!ng serve --target=development --environment=local-testing"
+  dev = "!git checkout develop && git pull origin develop"
+  plod = pull origin develop
+  amend = commit --amend -m
+  aa = add -A .
+  aacm = "!git add -A . && git commit -merge"
+  unstage =  reset --soft HEAD^
+  la = "!git config -l | grep alias | cut -c 7-"
+
 [branch]
-  autosetuprebase = always
+	autosetuprebase = always
 [color]
   ui = true
 [merge]
   tool = vimdiff
+	ff = false
 [mergetool]
   keeptemporaries = false
   keepbackups = false
@@ -45,4 +55,12 @@
   smudge = git-lfs smudge %f
   required = true
 [github]
-  user = albertofdzm
+	user = depablobernat
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/bernat.depablo/.stCommitMsg

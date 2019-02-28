@@ -3,8 +3,13 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
+alias p="cd ~/Projects"
+alias d="cd ~/Downloads"
+alias e="cd ~/Desktop"
+alias ibw="cd ~/Projects/iberostar-web"
+alias iba="cd ~/Projects/iberostar-api"
+
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
